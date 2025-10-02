@@ -37,7 +37,8 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>depends\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="BepInEx">
+    <Reference Include="BepInEx, Version=5.4.15.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>depends\BepInEx.dll</HintPath>
     </Reference>
     <Reference Include="System" />
@@ -58,6 +59,9 @@
   <ItemGroup>
     <Compile Include="TimeCapsuleNoCoffee.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include=".editorconfig" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

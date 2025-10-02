@@ -10,10 +10,9 @@ using HarmonyLib;
 namespace TimeCapsuleNoCoffee
 {
 	[BepInPlugin("net.bcasoft.timecapsulenocoffee", "TimeCapsuleNoCoffee", "1.0.0")]
-	[BepInProcess("Subnautica.exe")]
 	public class TimeCapsuleNoCoffee : BaseUnityPlugin
 	{
-		public void Awake()
+		private void Awake()
 		{
 			Harmony harmony = new Harmony("net.bcasoft.timecapsulenocoffee");
 			harmony.PatchAll();
@@ -27,18 +26,18 @@ namespace TimeCapsuleNoCoffee
 	[HarmonyPatch(typeof(TimeCapsuleContentProvider), nameof(TimeCapsuleContentProvider.GetItems))]
 	public class Patch_TimeCapsuleContentProvider
 	{
-		static List<TimeCapsuleItem> PostFix(List<TimeCapsuleItem> items)
+		static List<TimeCapsuleItem> Postfix(List<TimeCapsuleItem> __result)
 		{
 			List<TimeCapsuleItem> result = new List<TimeCapsuleItem>();
-			foreach (TimeCapsuleItem item in items)
+			foreach (TimeCapsuleItem item in __result)
 			{
 				if (item.techType == TechType.Coffee)
 				{
 					TimeCapsuleNoCoffee.LogSource.LogInfo("Removed a coffee in timecapsule!");
-                    continue;
+					continue;
 				}
 				result.Add(item);
-				TimeCapsuleNoCoffee.LogSource.LogInfo("Foreached a item in timecapsule, techtype = " + item.techType.ToString() + "(" + ((int)item.techType) + ")");
+				TimeCapsuleNoCoffee.LogSource.LogInfo("Foreached a item in timecapsule, techtype = " + item.techType.ToString() + "(" + ((int)item.techType) + ").");
 			}
 			return result;
 		}
